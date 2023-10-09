@@ -25,5 +25,3 @@ dist-ssr
 
 #enviroment variable 
 .env
-
-.eslintrc.cjs
