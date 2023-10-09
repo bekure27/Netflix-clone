@@ -1,0 +1,17 @@
+body{
+    background-color: black;
+}
+
+.banner_fadeBottom {
+  height: 18.3rem;
+  background-image: linear-gradient(
+    180deg,
+    transparent,
+    rgb(37, 37, 37, 0.61),
+    #111
+  );
+}
+
+#slider {
+  overflow-x: hidden;
+}
