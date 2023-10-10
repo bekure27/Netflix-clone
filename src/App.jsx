@@ -8,19 +8,45 @@ import UserPage from './components/UserPage';
 import RegisterPage from './components/RegisterPage';
 import { AuthProvider } from "./context/context";
 import ProtectRoute from './components/ProtectRoute';
+import SubscriptionForm from './components/SubscriptionFrom';
 
 function App() {
 
   return (
     <>
       <AuthProvider>
-        <Nav />
+   
+          <Nav />
+      
+
         <Routes>
           <Route path="/" element={<SignUpPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/user" element={<ProtectRoute><UserPage /></ProtectRoute> } />
-          <Route path="/home" element={<ProtectRoute><MainPage /></ProtectRoute> } />
+          <Route
+            path="/user"
+            element={
+              <ProtectRoute>
+                <UserPage />
+              </ProtectRoute>
+            }
+          />
+          <Route
+            path="/home"
+            element={
+              <ProtectRoute>
+                <MainPage />
+              </ProtectRoute>
+            }
+          />
+          <Route
+            path="/subscribe"
+            element={
+              <ProtectRoute>
+                <SubscriptionForm />
+              </ProtectRoute>
+            }
+          />
         </Routes>
       </AuthProvider>
     </>

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 function RegisterPage() {
   const [password, setPassword] = useState("");
-  const { user, signUp, setUser } = UserAuth();
+  const { user, signUp, setUser ,emailExists} = UserAuth();
   const location = useLocation();
   const email = location.state?.email || null;
   const navigate = useNavigate();
@@ -13,15 +13,26 @@ function RegisterPage() {
     setPassword(e.target.value);
   };
 
+
+
+
+  
   const handleSubmit = async () => {
     try {
+// const emailAlreadyExists = await emailExists(email);
+// if (emailAlreadyExists) {
+//   setError("Email address is already in use.");
+//   return;
+// }
+
  if (password.length < 6) {
    throw new Error("Password must be at least 6 characters long");
  }
 
       await signUp(email, password);
       setUser(email);
-      navigate("/home");
+      // navigate("/home");
+      // navigate("/subscribe", { state: { email } });
     } catch (error) {
       console.log(error.message);
       setError(error.message)
@@ -30,9 +41,12 @@ function RegisterPage() {
 
   useEffect(() => {
     if (user) {
-      navigate("/home");
+      // navigate("/home");
+       navigate("/subscribe", { state: { email } });
     }
   }, [user, navigate]);
+
+
 
 const styles = {
   backgroundColor: "white",

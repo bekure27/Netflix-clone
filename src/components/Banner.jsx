@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import axios from "../utils/api";
 import "../App.css";
 import { Link } from "react-router-dom";
-
+import { UserAuth } from "../context/context";
 const imgURL = "https://image.tmdb.org/t/p/original";
 
 
 function Banner({ reqUrl  }) {
 const [movies, setMovies] = useState([]);
-
+ const { isSubscribed} = UserAuth();
 
  
 const getData = async () => {
@@ -53,18 +53,20 @@ const title =
     >
       <div className="h-52 ml-8 pt-36">
         <h1 className="text-white text-4xl pb-2">{title}</h1>
-        <div className="">
 
-          <button className="text-white bg-gray-800 bg-opacity-50 font-bold px-8 py-2 mr-8 rounded-sm  border-none hover:bg-gray-300 outline-none hover:text-black hover:transition-all">
-            Play
-          </button>
-         
-         <Link to='/user'>
-          <button className="text-white bg-gray-800 bg-opacity-50 font-bold px-8 py-2  rounded-sm border-none  hover:bg-gray-300 outline-none hover:text-black hover:transition-all ">
-            My List
-          </button>
-         </Link>
-        </div>
+        {isSubscribed && (
+          <div className="">
+            <button className="text-white bg-gray-800 bg-opacity-50 font-bold px-8 py-2 mr-8 rounded-sm  border-none hover:bg-gray-300 outline-none hover:text-black hover:transition-all">
+              Play
+            </button>
+
+            <Link to="/user">
+              <button className="text-white bg-gray-800 bg-opacity-50 font-bold px-8 py-2  rounded-sm border-none  hover:bg-gray-300 outline-none hover:text-black hover:transition-all ">
+                My List
+              </button>
+            </Link>
+          </div>
+        )}
         <div className="text-white leading-5 pt-4 text-sm  max-w-sm  h-20 ">
           {discription}
         </div>

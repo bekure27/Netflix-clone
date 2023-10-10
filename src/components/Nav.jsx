@@ -6,7 +6,7 @@ import "../App.css";
 
 function Nav() {
   const [show, setShow] = useState(false);
- const { user, logOut } = UserAuth();
+ const {isSubscribed,user, logOut } = UserAuth();
  const navigate = useNavigate();
 
 
@@ -27,6 +27,8 @@ function Nav() {
     };
   }, []);
 
+// console.log(isSubscribed)
+
 
  const handleLogout = async () => {
     try {
@@ -43,7 +45,7 @@ function Nav() {
         show ? "bg-black" : ""
       }`}
     >
-      <Link to={user?.email ? '/home': '/'}>
+      <Link to={user?.email ? "/home" : "/"}>
         <img
           className="w-24  ml-3 object-contain -m-7 "
           src="/images/netflix_logo.png"
@@ -54,14 +56,24 @@ function Nav() {
       <div className="">
         {user?.email ? (
           <div className="flex gap-6 ">
-            <Link to="/user" >
-              <button className=" bg-red-600 px-5 py-1  text-white font-bold rounded">
-                My Movies
-              </button>
-            </Link>
+            {isSubscribed ? (
+              <Link to="/user">
+                <button className=" bg-red-600 px-5 py-1  text-white font-bold rounded">
+                  My Movies
+                </button>
+              </Link>
+            ) : (
+              <Link to="/subscribe">
+                <button className=" bg-red-600 px-5 py-1  text-white font-bold rounded">
+                  Subscribe
+                </button>
+              </Link>
+            )}
+
             <button
               onClick={handleLogout}
               className=" bg-red-600 px-5 py-1 text-white font-bold rounded"
+              title={user?.email}
             >
               Logout
             </button>

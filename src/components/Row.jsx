@@ -10,6 +10,7 @@ import "../App.css";
 import { UserAuth } from "../context/context";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "../utils/firebase-config";
+
 const imgURL = "https://image.tmdb.org/t/p/w500";
 
 function Row(props) {
@@ -19,7 +20,7 @@ function Row(props) {
   let [hoveredIndex, setHoveredIndex] = useState(-1);
   let [add, setAdd] = useState(false);
   let [save, setSaved] = useState(false);
-  let { user } = UserAuth();
+  let { user, isSubscribed } = UserAuth();
   const movieID = doc(db, "users", `${user?.email}`);
 
   // get movie data
@@ -91,9 +92,6 @@ const saveMovie = async (movie) => {
 
 
 
-
-
-
   //   slider setting 
   const opts = {
     height: "390",
@@ -152,7 +150,7 @@ const saveMovie = async (movie) => {
                 <>
                   <div
                     className="relative"
-                    key={index}
+                    key={movie.id}
                     onMouseEnter={() => handleMouseEnter(index)}
                     onMouseLeave={handleMouseLeave}
                   >
@@ -179,19 +177,25 @@ const saveMovie = async (movie) => {
                               movie?.original_name}
                           </p>
                         </div>
-                        <div
-                          onClick={() => saveMovie(movie)}
-                          className=" absolute top-0 right-0 px-7 "
-                        >
-                          {add ? (
-                            <IoMdAddCircle className="text-red-600" size={22} />
-                          ) : (
-                            <IoMdAddCircleOutline
-                              className="text-red-600"
-                              size={22}
-                            />
-                          )}
-                        </div>
+
+                        {isSubscribed && (
+                          <div
+                            onClick={() => saveMovie(movie)}
+                            className=" absolute top-0 right-0 px-7 "
+                          >
+                            {add ? (
+                              <IoMdAddCircle
+                                className="text-red-600"
+                                size={22}
+                              />
+                            ) : (
+                              <IoMdAddCircleOutline
+                                className="text-red-600"
+                                size={22}
+                              />
+                            )}
+                          </div>
+                        )}
                       </>
                     )}
                   </div>
