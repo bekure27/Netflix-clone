@@ -7,7 +7,9 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 app.use(express.json());
 // app.use(cors({ origin: "http://localhost:5173" }));
 
-app.use(cors({ origin: "https://netflix-frontend-five.vercel.app" }));
+// app.use(cors({ origin: "https://netflix-frontend-five.vercel.app" }));
+
+app.use(cors({ origin: "https://netflix-frontend-xbia.onrender.com" }));
 
 const stripeApiKey = process.env.STRIPE_SECRET_KEY;
 
@@ -53,8 +55,10 @@ app.post("/api/create-subscription", async (req, res) => {
       mode: "subscription",
       // success_url: "http://localhost:5173/home",
       // cancel_url: "http://localhost:5173/",
-      success_url: "https://netflix-frontend-five.vercel.app/home",
-      cancel_url: "https://netflix-frontend-five.vercel.app/",
+      // success_url: "https://netflix-frontend-five.vercel.app/home",
+      // cancel_url: "https://netflix-frontend-five.vercel.app/",
+      success_url: "https://netflix-frontend-xbia.onrender.com/home",
+      cancel_url: "https://netflix-frontend-xbia.onrender.com/",
     });
 
     res.json({ paymentLink: session.url });
