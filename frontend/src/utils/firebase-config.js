@@ -5,14 +5,14 @@ import { getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
+//  app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAXjJhNdQF6VvjdhA5nPuU7sOFiZ_DV9eU",
-  authDomain: "netflix-clone-3c186.firebaseapp.com",
-  projectId: "netflix-clone-3c186",
-  storageBucket: "netflix-clone-3c186.appspot.com",
-  messagingSenderId: "980942244074",
-  appId: "1:980942244074:web:5e561d00bd0e1af9932f93",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 
